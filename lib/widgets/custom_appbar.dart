@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/constants/app_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Function(GlobalKey key) scrollToSection;
@@ -24,7 +25,18 @@ const CustomAppBar({
 
   @override
   Widget build(BuildContext context) {
-		return Container();
+		return AppBar(
+      backgroundColor: Colors.black,
+      toolbarHeight: 80,
+      actions: [
+        TextButton(onPressed: () => scrollToSection(homeSectionKey), child: Text("Home", style: appbarText,)),
+        TextButton(onPressed: () => scrollToSection(aboutMeSectionKey), child: Text("About Me", style: appbarText)),
+        TextButton(onPressed: () => scrollToSection(stackSectionKey), child: Text("Stack", style: appbarText)),
+        TextButton(onPressed: () => scrollToSection(projectSectionKey), child: Text("Projects", style: appbarText)),
+        TextButton(onPressed: () => scrollToSection(testimonialSectionKey), child: Text("Testimonials",style: appbarText)),
+        TextButton(onPressed: () => scrollToSection(contactSectionKey), child: Text("Contact", style: appbarText)),
+      ],
+    );
   }
 
 }
