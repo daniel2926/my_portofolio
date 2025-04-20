@@ -10,10 +10,10 @@ class SubsectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       height: 28,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
       alignment: Alignment.center,
       child: Container(
-        width: 240, // Set your desired width
+        width: 160, // Set your desired width
         height: 28, // Set your desired height
         alignment: Alignment.center,
         decoration: BoxDecoration(

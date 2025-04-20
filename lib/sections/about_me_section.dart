@@ -11,7 +11,9 @@ class AboutMeSection extends StatelessWidget {
     return Container(
       height: 1300,
       color: grey50, // Optional: for visual distinction
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center, 
+        children: [
         SectionTitle(title: "About Me", titleStyle: sectionText),
         const SizedBox(height: 40),
         Container(
