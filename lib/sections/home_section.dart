@@ -48,7 +48,7 @@ class _HomeSectionState extends State<HomeSection> {
                         width: 24,
                         height: 24,
                       ),
-                      url: 'https://github.com/daniel2926',
+                      url: 'https://www.linkedin.com/in/daniel-simamora-260704dc/',
                       size: 48),
                 ],
               ),
