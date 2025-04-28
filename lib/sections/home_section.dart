@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:my_portfolio/constants/app_colors.dart';
@@ -13,7 +14,38 @@ class HomeSection extends StatefulWidget {
   State<HomeSection> createState() => _HomeSectionState();
 }
 
-class _HomeSectionState extends State<HomeSection> {
+class _HomeSectionState extends State<HomeSection> with TickerProviderStateMixin {
+  late AnimationController _animationController;  // Deklarasikan AnimationController
+  late Animation<Offset> _slideAnimation;  // Deklarasikan Animation<Offset>
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Inisialisasi AnimationController
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 2), // Durasi animasi
+      vsync: this,
+    );
+
+    // Inisialisasi Animation<Offset> dengan gerakan dari kanan ke kiri
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(1.5, 0.0),  // Mulai dari kanan layar
+      end: Offset.zero,  // Berhenti di posisi normal
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,  // Kurva animasi
+    ));
+
+    // Memulai animasi
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();  // Jangan lupa dispose AnimationController
+    super.dispose();
+  }
   Widget build(BuildContext context) {
     return Container(
         color: appWhite,
@@ -26,7 +58,19 @@ class _HomeSectionState extends State<HomeSection> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Hi, I'm Daniel Yosh Apriando 👋", style: headline1),
+              AnimatedTextKit(
+                animatedTexts: [
+                TyperAnimatedText("Hi, I'm Daniel Yosh Apriando 👋", 
+                textStyle: headline1, 
+                speed: const Duration(
+                  milliseconds: 100,  
+                   ),
+              ),
+              ],
+              isRepeatingAnimation: true,  // Animasi diulang terus menerus
+              pause: const Duration(milliseconds: 500)
+              ),
+              // Text("Hi, I'm Daniel Yosh Apriando 👋", style: headline1),
               SizedBox(height: 20),
               Text(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus convallis blandit pharetra. Vivamus erat magna,Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas facilisis scelerisque erat, eget molestie libero congue vitae. Pellentesque lacinia eros quam, non feugiat sapien vulputate accumsan.",
@@ -83,17 +127,20 @@ class _HomeSectionState extends State<HomeSection> {
                 ],
               ),
               SizedBox(height: 40),
-              Center(
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: appPink,
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/FotoProfile.jpeg'), // ganti dengan path kamu
-                      fit: BoxFit.contain,
+              SlideTransition(
+                position: _slideAnimation,
+                child: Center(
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: appPink,
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/FotoProfile.jpeg'), // ganti dengan path kamu
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ),
