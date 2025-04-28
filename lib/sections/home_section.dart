@@ -29,7 +29,7 @@ class _HomeSectionState extends State<HomeSection> {
               Text("Hi, I'm Daniel Yosh Apriando 👋", style: headline1),
               SizedBox(height: 20),
               Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus convallis blandit pharetra. Vivamus erat magna, commodo in tellus eget, vestibulum mollis purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque molestie enim id facilisis luctus. Vivamus in rutrum justo. Curabitur tincidunt pharetra efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas facilisis scelerisque erat, eget molestie libero congue vitae. Pellentesque lacinia eros quam, non feugiat sapien vulputate accumsan.",
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus convallis blandit pharetra. Vivamus erat magna,Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas facilisis scelerisque erat, eget molestie libero congue vitae. Pellentesque lacinia eros quam, non feugiat sapien vulputate accumsan.",
                   style: bodyText1),
               SizedBox(height: 20),
               Row(

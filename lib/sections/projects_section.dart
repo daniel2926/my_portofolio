@@ -1,35 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/constants/app_colors.dart';
-import 'package:my_portfolio/constants/app_fonts.dart';
-import 'package:my_portfolio/widgets/project_card.dart';
-import 'package:my_portfolio/widgets/section_title.dart';
+import '../widgets/project_card.dart'; // pastikan import path-nya benar
 
 class ProjectsSection extends StatelessWidget {
-  const ProjectsSection({super.key});
+  const ProjectsSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 2460,
-      color: appWhite, // Optional: for visual distinction
+      key: const Key('projects'),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+      color: Colors.grey.shade50,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SectionTitle(title: "Projects", titleStyle: sectionText,),
-          SizedBox(height: 48),
-          Text("Some of the noteworthy projects i have built : "),
-          SizedBox(height: 48),
-          ProjectCard(
-            imagePath: "assets/Boejoe.png", 
-            title: "Renew Market Application Development", 
-            role: "Frontend and Backend Developer", 
-            skillsUsed: "Flutter, Dart, Firebase", 
-            skills: ['Flutter', 'Dart', 'Firebase'], 
-            color: appGreen, 
-            description:"Quisque imperdiet lobortis elit, eu ultrices metus aliquet tristique. Ut condimentum, ante sit amet congue facilisis, neque lorem congue nisi, et sollicitudin dolor elit fermentum diam.", 
-            projectPeriod: "Jan, 2025 - Mar, 2025", 
-            width: 50, 
-            link: 'https://github.com/daniel2926')
+          // Title
+          Text(
+            "Projects",
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "Some of the noteworthy projects I have built:",
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.grey.shade600,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 48),
+
+          // Project Cards
+          Column(
+            children: [
+              ProjectCard(
+                imagePath: 'assets/ss.png',
+                title: 'Renew market application development',
+                role: 'Frontend and Backend Developer',
+                skillsUsed: 'Flutter, Dart, Firebase',
+                projectPeriod: 'Jan, 2025 - Mar, 2025',
+                description:
+                    'A simple web app for buying and selling used items, featuring user authentication, item listings, real-time chat, and search filters. Built with Flutter and Firebase for a smooth and user-friendly experience.',
+                skills: ['Flutter', 'Firebase', 'Dart', 'Figma', 'Git'],
+                imageBackgroundColor: Colors.pink.shade100,
+                projectLink: 'https://yourprojectlink.com',
+              ),
+              const SizedBox(height: 40),
+              ProjectCard(
+                imagePath: 'ProjectDaniel.png',
+                title: 'My Portfolio Website',
+                role: 'Frontend Developer',
+                skillsUsed: 'Flutter, Dart, Web Deployment',
+                projectPeriod: 'Apr, 2025',
+                description:
+                    'A personal portfolio website showcasing projects, skills, and contact information. Built responsively with Flutter Web.',
+                skills: ['Flutter', 'Dart', 'Firebase Hosting'],
+                imageBackgroundColor: Colors.blue.shade100,
+                projectLink: 'https://yourportfoliolink.com',
+              ),
+            ],
+          ),
         ],
       ),
     );

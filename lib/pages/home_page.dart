@@ -7,6 +7,7 @@ import 'package:my_portfolio/sections/section.dart';
 import 'package:my_portfolio/sections/stack_section.dart';
 import 'package:my_portfolio/sections/testimonials_section.dart';
 import 'package:my_portfolio/widgets/custom_appbar.dart';
+import 'package:my_portfolio/widgets/custom_footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,7 +52,8 @@ class _HomePageState extends State<HomePage> {
             StackSection(key : stackSectionKey),
             ProjectsSection(key: projectSectionKey,),
             TestimonialsSection(key: testimonialSectionKey,),
-            ContactSection(key: contactSectionKey,)
+            ContactSection(key: contactSectionKey,),
+            CustomFooter()
           ],
         ),
       ),

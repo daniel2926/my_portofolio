@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/constants/app_colors.dart';
-import 'package:my_portfolio/constants/app_fonts.dart';
-import 'package:my_portfolio/widgets/subsection_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -9,141 +6,180 @@ class ProjectCard extends StatelessWidget {
   final String title;
   final String role;
   final String skillsUsed;
-  final List<String> skills;
-  final Color color;
-  final String description;
   final String projectPeriod;
-  final double width;
-  final String link;
+  final String description;
+  final List<String> skills;
+  final Color imageBackgroundColor;
+  final String projectLink;
 
   const ProjectCard({
+    Key? key,
     required this.imagePath,
     required this.title,
     required this.role,
     required this.skillsUsed,
-    required this.skills,
-    required this.color,
-    required this.description,
     required this.projectPeriod,
-    required this.width,
-    required this.link,
-    super.key,
-  });
+    required this.description,
+    required this.skills,
+    required this.imageBackgroundColor,
+    required this.projectLink,
+  }) : super(key: key);
 
   void _launchURL() async {
-    final Uri uri = Uri.parse(link);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+    final Uri url = Uri.parse(projectLink);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $projectLink';
     }
   }
 
   @override
-Widget build(BuildContext context) {
-  return Container(
-    width: width,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(12.0),
-      boxShadow: [
-        BoxShadow(
-          color: appBlack.withOpacity(0.07),
-          blurRadius: 3.0,
-          offset: const Offset(0, 4),
-        ),
-        BoxShadow(
-          color: appBlack.withOpacity(0.06),
-          offset: const Offset(0, 2),
-          blurRadius: 2.0,
-        )
-      ],
-    ),
-    color: appWhite,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // IMAGE SECTION
-        Container(
-          height: 180, // Set fixed height to prevent overflow/stretching
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 24.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Bagian gambar
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: imageBackgroundColor,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            padding: const EdgeInsets.all(32),
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.contain,
             ),
           ),
-          alignment: Alignment.center,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.contain,
+
+          // Bagian teks
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 16),
+
+                // Role
+                Text.rich(
+                  TextSpan(
+                    text: "• Role: ",
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: role,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Skills Used
+                Text.rich(
+                  TextSpan(
+                    text: "• Skills Used: ",
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: skillsUsed,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Project Period
+                Text.rich(
+                  TextSpan(
+                    text: "• Project Period: ",
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: projectPeriod,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Project Description
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "• Project Description: ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Expanded(
+                      child: Text(
+                        description,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                // Skills Chips
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: skills.map((skill) {
+                    return Chip(
+                      label: Text(skill),
+                      backgroundColor: Colors.grey.shade200,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 24),
+
+                // Project Link
+                ElevatedButton.icon(
+                  onPressed: _launchURL,
+                  icon: const Icon(Icons.open_in_new, size: 18),
+                  label: const Text('View Project'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey.shade800,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    elevation: 0,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-
-        // CONTENT SECTION
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: headline3),
-              const SizedBox(height: 8),
-              Text.rich(
-                TextSpan(
-                  text: "• Role: ",
-                  style: headline4,
-                  children: [TextSpan(text: role, style: bodyText3)],
-                ),
-              ),
-              Text.rich(
-                TextSpan(
-                  text: "• Skills Used: ",
-                  style: headline4,
-                  children: [TextSpan(text: skillsUsed, style: bodyText3)],
-                ),
-              ),
-              Text.rich(
-                TextSpan(
-                  text: "• Project Period: ",
-                  style: headline4,
-                  children: [TextSpan(text: projectPeriod, style: bodyText3)],
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text.rich(
-                TextSpan(
-                  text: "• Project Description: ",
-                  style: headline4,
-                  children: [TextSpan(text: description, style: bodyText3)],
-                ),
-              ),
-
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: skills
-                    .map((skill) => SubsectionTitle(title: skill, textStyle: headline4))
-                    .toList(),
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: _launchURL,
-                child: const Text('View More', style: TextStyle(color: Colors.blue)),
-              ),
-            ],
-          ),
-        ),
-
-        // ICON BUTTON (optional)
-        Align(
-          alignment: Alignment.centerRight,
-          child: IconButton(
-            icon: Icon(Icons.open_in_new, size: 24, color: grey400),
-            onPressed: _launchURL,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
+        ],
+      ),
+    );
+  }
 }
