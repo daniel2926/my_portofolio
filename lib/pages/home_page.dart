@@ -9,6 +9,7 @@ import 'package:my_portfolio/sections/projects_section.dart';
 import 'package:my_portfolio/sections/stack_section.dart';
 import 'package:my_portfolio/sections/testimonials_section.dart';
 import 'package:my_portfolio/widgets/custom_appbar.dart';
+import 'package:my_portfolio/widgets/custom_drawer.dart';
 import 'package:my_portfolio/widgets/custom_footer.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +20,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  double tablewidth = 600;
+  double desktop = 1024;
+
   bool isAboutVisible = false;
   bool isProjectsVisible = false;
   bool isContactVisible = false;
@@ -116,57 +120,124 @@ void dispose() {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        scrollToSection: scrollToSection,
-        homeSectionKey: homeSectionKey,
-        aboutMeSectionKey: aboutMeSectionKey,
-        stackSectionKey: stackSectionKey,
-        projectSectionKey: projectSectionKey,
-        testimonialSectionKey: testimonialSectionKey,
-        contactSectionKey: contactSectionKey,
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        controller: _verticalScrollController,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedSection(
-              isVisible: isHomeVisible,
-              slideAnimation: _slideAnimation,
-              child: HomeSection(key: homeSectionKey),
+@override
+Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  final bool isDesktop = screenWidth >= desktop;
+  final bool isTablet = screenWidth >= tablewidth;
+
+  return Scaffold(
+    appBar: isDesktop
+        ? CustomAppBar(
+            scrollToSection: scrollToSection,
+            homeSectionKey: homeSectionKey,
+            aboutMeSectionKey: aboutMeSectionKey,
+            stackSectionKey: stackSectionKey,
+            projectSectionKey: projectSectionKey,
+            testimonialSectionKey: testimonialSectionKey,
+            contactSectionKey: contactSectionKey,
+          )
+        : CustomDrawer(
+            scrollToSection: scrollToSection,
+            homeSectionKey: homeSectionKey,
+            aboutMeSectionKey: aboutMeSectionKey,
+            stackSectionKey: stackSectionKey,
+            projectSectionKey: projectSectionKey,
+            testimonialSectionKey: testimonialSectionKey,
+            contactSectionKey: contactSectionKey,
+          ),
+    backgroundColor: Colors.white,
+    body: !isDesktop
+        ? SingleChildScrollView(
+            controller: _verticalScrollController,
+            child: SingleChildScrollView(
+              controller: ScrollController(),
+              scrollDirection: Axis.horizontal,
+              physics: screenWidth < tablewidth
+                  ? const BouncingScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
+              child: SizedBox(
+                width: screenWidth < tablewidth ? tablewidth : screenWidth,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedSection(
+                      isVisible: isHomeVisible,
+                      slideAnimation: _slideAnimation,
+                      child: HomeSection(key: homeSectionKey),
+                    ),
+                    AnimatedSection(
+                      isVisible: isAboutVisible,
+                      slideAnimation: _slideAnimation,
+                      child: AboutMeSection(key: aboutMeSectionKey),
+                    ),
+                    AnimatedSection(
+                      isVisible: isSkillsVisible,
+                      slideAnimation: _slideAnimation,
+                      child: StackSection(key: stackSectionKey),
+                    ),
+                    AnimatedSection(
+                      isVisible: isProjectsVisible,
+                      slideAnimation: _slideAnimation,
+                      child: ProjectsSection(key: projectSectionKey),
+                    ),
+                    AnimatedSection(
+                      isVisible: isTestimonialsVisible,
+                      slideAnimation: _slideAnimation,
+                      child: TestimonialsSection(key: testimonialSectionKey),
+                    ),
+                    AnimatedSection(
+                      isVisible: isContactVisible,
+                      slideAnimation: _slideAnimation,
+                      child: ContactSection(key: contactSectionKey),
+                    ),
+                    CustomFooter(),
+                  ],
+                ),
+              ),
             ),
-            AnimatedSection(
-              isVisible: isAboutVisible,
-              slideAnimation: _slideAnimation,
-              child: AboutMeSection(key: aboutMeSectionKey),
+          )
+        : SingleChildScrollView(
+            controller: _verticalScrollController,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedSection(
+                  isVisible: isHomeVisible,
+                  slideAnimation: _slideAnimation,
+                  child: HomeSection(key: homeSectionKey),
+                ),
+                AnimatedSection(
+                  isVisible: isAboutVisible,
+                  slideAnimation: _slideAnimation,
+                  child: AboutMeSection(key: aboutMeSectionKey),
+                ),
+                AnimatedSection(
+                  isVisible: isSkillsVisible,
+                  slideAnimation: _slideAnimation,
+                  child: StackSection(key: stackSectionKey),
+                ),
+                AnimatedSection(
+                  isVisible: isProjectsVisible,
+                  slideAnimation: _slideAnimation,
+                  child: ProjectsSection(key: projectSectionKey),
+                ),
+                AnimatedSection(
+                  isVisible: isTestimonialsVisible,
+                  slideAnimation: _slideAnimation,
+                  child: TestimonialsSection(key: testimonialSectionKey),
+                ),
+                AnimatedSection(
+                  isVisible: isContactVisible,
+                  slideAnimation: _slideAnimation,
+                  child: ContactSection(key: contactSectionKey),
+                ),
+                CustomFooter(),
+              ],
             ),
-            AnimatedSection(
-              isVisible: isSkillsVisible,
-              slideAnimation: _slideAnimation,
-              child: StackSection(key: stackSectionKey),
-            ),
-            AnimatedSection(
-              isVisible: isProjectsVisible,
-              slideAnimation: _slideAnimation,
-              child: ProjectsSection(key: projectSectionKey),
-            ),
-            AnimatedSection(
-              isVisible: isTestimonialsVisible,
-              slideAnimation: _slideAnimation,
-              child: TestimonialsSection(key: testimonialSectionKey),
-            ),
-            AnimatedSection(
-              isVisible: isContactVisible,
-              slideAnimation: _slideAnimation,
-              child: ContactSection(key: contactSectionKey),
-            ),
-            CustomFooter(),
-          ],
-        ),
-      ),
-    );
-  }
+          ),
+  );
+}
+
+
 }
