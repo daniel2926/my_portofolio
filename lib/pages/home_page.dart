@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/sections/about_me_section.dart';
 import 'package:my_portfolio/sections/animated_section.dart';
@@ -35,12 +37,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
+  Timer? _debounce;
+
 
   @override
   void initState() {
     super.initState();
 
-    // Initialize the animation controller
     _animationController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
@@ -54,56 +57,52 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       curve: Curves.easeInOut,
     ));
 
-    // Trigger visibility changes after some time
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        isHomeVisible = true; // Make the HomeSection visible
-        print('Home section visible: $isHomeVisible');
-        _animationController.forward(); // Trigger the animation for the first section
-      });
-    });
+    _verticalScrollController.addListener(() {
+  if (_debounce?.isActive ?? false) _debounce!.cancel();
+  _debounce = Timer(const Duration(milliseconds: 100), () {
+    onScroll();
+  });
+});
 
-    Future.delayed(const Duration(seconds: 4), () {
-      setState(() {
-        isAboutVisible = true; // Make the AboutMeSection visible
-        print('About section visible: $isAboutVisible');
-      });
-    });
-
-    Future.delayed(const Duration(seconds: 6), () {
-      setState(() {
-        isProjectsVisible = true; // Make the ProjectsSection visible
-        print('Projects section visible: $isProjectsVisible');
-      });
-    });
-
-    Future.delayed(const Duration(seconds: 8), () {
-      setState(() {
-        isSkillsVisible = true; // Make the SkillsSection visible
-        print('Skills section visible: $isSkillsVisible');
-      });
-    });
-
-    Future.delayed(const Duration(seconds: 10), () {
-      setState(() {
-        isTestimonialsVisible = true; // Make the TestimonialsSection visible
-        print('Testimonials section visible: $isTestimonialsVisible');
-      });
-    });
-
-    Future.delayed(const Duration(seconds: 12), () {
-      setState(() {
-        isContactVisible = true; // Make the ContactSection visible
-        print('Contact section visible: $isContactVisible');
-      });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onScroll();
+      _animationController.forward();
     });
   }
+
+  onScroll() {
+  checkSectionVisibility(homeSectionKey, (v) => setState(() => isHomeVisible = v), isHomeVisible);
+  checkSectionVisibility(aboutMeSectionKey, (v) => setState(() => isAboutVisible = v), isAboutVisible);
+  checkSectionVisibility(stackSectionKey, (v) => setState(() => isSkillsVisible = v), isSkillsVisible);
+  checkSectionVisibility(projectSectionKey, (v) => setState(() => isProjectsVisible = v), isProjectsVisible);
+  checkSectionVisibility(testimonialSectionKey, (v) => setState(() => isTestimonialsVisible = v), isTestimonialsVisible);
+  checkSectionVisibility(contactSectionKey, (v) => setState(() => isContactVisible = v), isContactVisible);
+}
+
+
+  void checkSectionVisibility(GlobalKey key, void Function(bool) onVisible, bool currentValue) {
+  final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
+  if (box != null) {
+    final position = box.localToGlobal(Offset.zero).dy;
+    final screenHeight = MediaQuery.of(context).size.height.clamp(700, double.infinity);
+    final visible = position < screenHeight * 1.0;
+
+    if (visible != currentValue) {
+      onVisible(visible);
+    }
+  }
+}
+
 
   @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+void dispose() {
+  _debounce?.cancel();
+  _verticalScrollController.removeListener(onScroll);
+  _animationController.dispose();
+  _verticalScrollController.dispose();
+  super.dispose();
+}
+
 
   void scrollToSection(GlobalKey key) {
     final context = key.currentContext;
@@ -145,12 +144,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: AboutMeSection(key: aboutMeSectionKey),
             ),
             AnimatedSection(
-              isVisible: isProjectsVisible,
+              isVisible: isSkillsVisible,
               slideAnimation: _slideAnimation,
               child: StackSection(key: stackSectionKey),
             ),
             AnimatedSection(
-              isVisible: isSkillsVisible,
+              isVisible: isProjectsVisible,
               slideAnimation: _slideAnimation,
               child: ProjectsSection(key: projectSectionKey),
             ),
