@@ -7,6 +7,7 @@ class ProjectsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 2800,
       key: const Key('projects'),
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
       color: Colors.grey.shade50,
