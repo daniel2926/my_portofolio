@@ -10,7 +10,7 @@ class AboutMeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 1300,
-      color: grey50, // Optional: for visual distinction
+      color: appWhite, // Optional: for visual distinction
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center, 
         children: [

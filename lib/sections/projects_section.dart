@@ -48,7 +48,7 @@ class ProjectsSection extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               ProjectCard(
-                imagePath: 'ProjectDaniel.png',
+                imagePath: 'assets/ProjectDaniel.png',
                 title: 'My Portfolio Website',
                 role: 'Frontend Developer',
                 skillsUsed: 'Flutter, Dart, Web Deployment',

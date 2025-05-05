@@ -9,6 +9,7 @@ import 'package:my_portfolio/sections/home_section.dart';
 import 'package:my_portfolio/sections/projects_section.dart';
 import 'package:my_portfolio/sections/stack_section.dart';
 import 'package:my_portfolio/sections/tablet_about_me_section.dart';
+import 'package:my_portfolio/sections/tablet_contact_section.dart';
 import 'package:my_portfolio/sections/tablet_home_section.dart';
 import 'package:my_portfolio/sections/tablet_project_section.dart';
 import 'package:my_portfolio/sections/tablet_stack_section.dart';
@@ -203,7 +204,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       AnimatedSection(
                         isVisible: isContactVisible,
                         slideAnimation: _slideAnimation,
-                        child: ContactSection(key: contactSectionKey),
+                         child: isTablet && !isDesktop
+                            ? TabletContactSection(key: contactSectionKey,)
+                            : TabletContactSection(key: contactSectionKey),
                       ),
                       CustomFooter(),
                     ],
