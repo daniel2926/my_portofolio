@@ -63,7 +63,7 @@ class TabletProjectSection extends StatelessWidget {
                     ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 550),
                       child: ProjectCard(
-                        imagePath: 'ProjectDaniel.png',
+                        imagePath: 'assets/ProjectDaniel.png',
                         title: 'My Portfolio Website',
                         role: 'Frontend Developer',
                         skillsUsed: 'Flutter, Dart, Web Deployment',

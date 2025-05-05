@@ -11,7 +11,7 @@ class TabletTestimonialsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double maxCardWidth = constraints.maxWidth < 700 ? constraints.maxWidth * 0.9 : 600;
+        double maxCardWidth = constraints.maxWidth < 600 ? constraints.maxWidth * 0.9 : 600;
 
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 48.0, horizontal: 24.0),

@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  double tablewidth = 600;
+  double tablewidth = 200;
   double desktop = 1024;
 
   bool isAboutVisible = true;
