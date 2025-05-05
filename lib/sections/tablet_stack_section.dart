@@ -16,7 +16,7 @@ class TabletStackSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24),
       alignment: Alignment.center,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 1000),
+        constraints: const BoxConstraints(maxWidth: 400),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
