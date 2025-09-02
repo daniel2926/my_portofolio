@@ -28,7 +28,7 @@ class TabletTestimonialsSection extends StatelessWidget {
                 style: bodyText1,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 64),
+              const SizedBox(height: 55),
 
               // Testimonial Cards
               Column(
@@ -36,7 +36,7 @@ class TabletTestimonialsSection extends StatelessWidget {
                 children: [
                   TestimonialCard(
                     width: maxCardWidth,
-                    height: 280,
+                    height: 300,
                     saying:
                         'Working with them was a great experience. The quality of code and communication was top-notch!',
                     name: 'Daniel Yosh Apriando',
@@ -45,7 +45,7 @@ class TabletTestimonialsSection extends StatelessWidget {
                   const SizedBox(height: 32),
                   TestimonialCard(
                     width: maxCardWidth,
-                    height: 280,
+                    height: 300,
                     saying:
                         'A reliable developer who always delivers on time. Highly recommended!',
                     name: 'Kevin Smith',
@@ -54,7 +54,7 @@ class TabletTestimonialsSection extends StatelessWidget {
                   const SizedBox(height: 32),
                   TestimonialCard(
                     width: maxCardWidth,
-                    height: 280,
+                    height: 360,
                     saying:
                         'Their dedication and attention to detail elevated our entire project. Truly a team player with great initiative and passion.',
                     name: 'Emily Taylor',

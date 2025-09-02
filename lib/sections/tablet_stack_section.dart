@@ -95,29 +95,29 @@ class TabletStackSection extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   const TabletExperienceCard(
-                    title: "Internship",
-                    organization: "Software Factory",
-                    period: "2023 - Present",
-                    explanation: [
-                      "Developed frontend with Flutter.",
-                      "Maintained backend with Firebase.",
-                      "Collaborated in Agile environment.",
-                      "Implemented responsive UI.",
-                      "Wrote unit and widget tests."
-                    ],
+                    title: "IT Student",
+                      organization: "Jakarta International University",
+                      period: "2022 - Present",
+                      explanation: [
+                        "Built internal dashboard features.",
+                        "Integrated REST APIs with robust.",
+                        "Collaborated in daily Scrum.",
+                        "Refactored legacy code for better.",
+                        "Wrote documentation for onboardin.",
+                      ]
                   ),
                   const SizedBox(height: 16),
                   const TabletExperienceCard(
-                    title: "IT Student",
-                    organization: "Jakarta International University",
-                    period: "2022 - Present",
-                    explanation: [
-                      "Built internal dashboard features.",
-                      "Integrated REST APIs with robustness.",
-                      "Collaborated in daily Scrum.",
-                      "Refactored legacy code for clarity.",
-                      "Wrote onboarding documentation.",
-                    ],
+                    title: "Participant",
+                      organization: "Handong Global University",
+                      period: "2025 - 2025",
+                      explanation: [
+                        "Completed the UNESCO UNITWIN Design Sprint Camp 2025.",
+                        "Trained in problem identification and solution mapping.",
+                        "Practiced collaborative decision-making methods.",
+                        "Designed and prototyped apps using Figma.",
+                        "Explored AI integration in digital product design.",
+                      ]
                   ),
                 ],
               ),

@@ -97,17 +97,6 @@ class StackSection extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   ExperienceCard(
-                      title: "Internship",
-                      organization: "Software Factory",
-                      period: "2023 - Present",
-                      explanation: [
-                        "Developed frontend with Flutter.",
-                        "Maintained backend with Firebase.",
-                        "Collaborated in Agile environment.",
-                        "Implemented responsive UI.",
-                        "Wrote unit and widget tests."
-                      ]),
-                  ExperienceCard(
                       title: "IT Student",
                       organization: "Jakarta International University",
                       period: "2022 - Present",
@@ -117,6 +106,17 @@ class StackSection extends StatelessWidget {
                         "Collaborated in daily Scrum.",
                         "Refactored legacy code for better.",
                         "Wrote documentation for onboardin.",
+                      ]),
+                  ExperienceCard(
+                      title: "Participant",
+                      organization: "Handong Global University",
+                      period: "2025 - 2025",
+                      explanation: [
+                        "Completed the UNESCO UNITWIN Design Sprint Camp 2025.",
+                        "Trained in problem identification and solution mapping.",
+                        "Practiced collaborative decision-making methods.",
+                        "Designed and prototyped apps using Figma.",
+                        "Explored AI integration in digital product design.",
                       ]),
                 ],
               ),

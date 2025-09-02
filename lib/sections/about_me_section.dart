@@ -23,7 +23,7 @@ class AboutMeSection extends StatelessWidget {
             width: 341,
             height: 341,
             child: Image.asset(
-              'assets/FotoProfile.jpeg',
+              'assets/1.png',
               width: 341,
               fit: BoxFit.cover,
             ),
@@ -42,17 +42,12 @@ class AboutMeSection extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus convallis blandit pharetra. Vivamus erat magna, commodo in tellus eget, vestibulum mollis purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque molestie enim id facilisis luctus. Vivamus in rutrum justo. Curabitur tincidunt pharetra efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas facilisis scelerisque erat, eget molestie libero congue vitae. Pellentesque lacinia eros quam, non feugiat sapien vulputate accumsan.",
+                "I’m a technology enthusiast who enjoys solving problems through code and design. Over the years, I’ve explored different areas of development—from web applications to hardware integration—allowing me to combine creativity with engineering skills. I believe in writing clean, maintainable code and building products that truly help people.",
                 style: bodyText2,
               ),
               SizedBox(height: 20),
               Text(
-                "Quisque imperdiet lobortis elit, eu ultrices metus aliquet tristique. Ut condimentum, ante sit amet congue facilisis, neque lorem congue nisi, et sollicitudin dolor elit fermentum diam.",
-                style: bodyText2,
-              ),
-              SizedBox(height: 20),
-              Text(
-                "Quisque imperdiet lobortis elit, eu ultrices metus aliquet tristique.",
+                "Along the way, I’ve developed skills and interests in different areas of technology, including:",
                 style: bodyText2,
               ),
               SizedBox(height: 20),
@@ -62,14 +57,14 @@ class AboutMeSection extends StatelessWidget {
                     children: const [
                       Expanded(
                         child: Text(
-                          '- Web Developer',
+                          '- Exploring Data Analytics',
                           textAlign: TextAlign.left,
                           style: bodyText3,
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          '- Software Engineer',
+                          '- Passionate about Software Development',
                           textAlign: TextAlign.left,
                           style: bodyText3,
                         ),
@@ -81,14 +76,14 @@ class AboutMeSection extends StatelessWidget {
                     children: const [
                       Expanded(
                         child: Text(
-                          '- Hardware Engineer',  
+                          '- Building Apps with Flutter',  
                           textAlign: TextAlign.left,
                           style: bodyText3,
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          '- Programming Enthusiast',
+                          '- Learning Cloud Technologies',
                           textAlign: TextAlign.left,
                           style: bodyText3,
                         ),
@@ -99,7 +94,7 @@ class AboutMeSection extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                " :) Nam euismod purus ut posuere bibendum.",
+                "✨Thank you for your time and assistance.",
                 style: bodyText2,
               )
             ],

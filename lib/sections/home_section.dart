@@ -73,7 +73,7 @@ class _HomeSectionState extends State<HomeSection> with TickerProviderStateMixin
               // Text("Hi, I'm Daniel Yosh Apriando 👋", style: headline1),
               SizedBox(height: 20),
               Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus convallis blandit pharetra. Vivamus erat magna,Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas facilisis scelerisque erat, eget molestie libero congue vitae. Pellentesque lacinia eros quam, non feugiat sapien vulputate accumsan.",
+                  "I’m passionate about building modern and user-friendly applications with clean design and efficient code. With a strong foundation in technology and problem-solving, I enjoy turning ideas into real projects that create impact. Currently, I’m open to exciting opportunities and collaborations to bring innovative solutions to life.",
                   style: bodyText1),
               SizedBox(height: 20),
               Row(
@@ -138,7 +138,7 @@ class _HomeSectionState extends State<HomeSection> with TickerProviderStateMixin
                       color: appPink,
                       image: DecorationImage(
                         image: AssetImage(
-                            'assets/FotoProfile.jpeg'), // ganti dengan path kamu
+                            'assets/1.png'), // ganti dengan path kamu
                         fit: BoxFit.contain,
                       ),
                     ),
